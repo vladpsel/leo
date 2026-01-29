@@ -1,4 +1,5 @@
 import './bootstrap';
+import 'vue-sonner/style.css';
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
@@ -10,7 +11,7 @@ createInertiaApp({
     setup({el, App, props, plugin}) {
         const app = createApp(Root, {App, props})
         app.use(plugin)
-        pp.use(ZiggyVue)
+        app.use(ZiggyVue)
         app.mount(el)
     },
 }).then();
