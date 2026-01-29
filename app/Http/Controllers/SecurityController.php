@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SecurityController extends Controller
 {
-    public function login(LoginFormRequest $request)
+    public function login(LoginFormRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect();
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -22,7 +23,7 @@ class SecurityController extends Controller
     }
 
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
 

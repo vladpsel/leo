@@ -15,6 +15,11 @@
     width: 100%;
 }
 
+.login-form {
+    max-width: 300px;
+}
+
+
 .login-form input {
     border: 1px solid #ccc;
 }
