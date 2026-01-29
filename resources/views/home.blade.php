@@ -13,8 +13,6 @@
     class="bg-[#FDFDFC] dark:bg-[#0a0a0a] p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col h-full"
 >
 
-@dump(auth()->user())
-
 <div class="flex justify-center items-center min-h-screen">
     <div class="w-1/3">
         <form action="{{ route('login') }}" method="post" class="login-form">
