@@ -14,20 +14,22 @@
 
 <div class="flex justify-center items-center min-h-screen">
     <div class="w-1/3">
-        <form action="#">
+        <form action="#" class="login-form">
             @csrf
-            <div class="icon w-[50px] mb-4">
-                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="">
+            <div class="flex justify-center mb-4">
+                <div class="icon w-[50px]">
+                    <img src="/build/images/logo.png" alt="">
+                </div>
             </div>
             <fieldset class="mb-2">
                 <p class="font-bold text-sm mb-1">Login</p>
                 <div>
-                    <input type="text" class="w-full border-2 border-gray-400 rounded-md p-2" placeholder="Email">
+                    <input type="text" class="w-full border-gray-400 rounded-md p-2" placeholder="Email">
                 </div>
             </fieldset>
             <fieldset class="mb-2">
                 <p class="font-bold text-sm mb-1">Password</p>
-                <input type="password" class="w-full border-2 border-gray-400 rounded-md p-2" placeholder="Email">
+                <input type="password" class="w-full border-gray-400 rounded-md p-2" placeholder="Email">
             </fieldset>
             <fieldset>
                 <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-md p-2 cursor-pointer">Login</button>

@@ -14,3 +14,7 @@
 .icon img{
     width: 100%;
 }
+
+.login-form input {
+    border: 1px solid #ccc;
+}
