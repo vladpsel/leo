@@ -10,6 +10,7 @@ Laravel-based SPA for servers orchestration.
 - Docker
 - Blade Components
 - Ziggy (for frontend routing)
+- Schad Vue
 
 ### notice
 run throught
