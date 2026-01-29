@@ -24,9 +24,10 @@ class ServerApiRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'ip' => 'required|ip',
-            'password' => 'required|string|max:255',
             'username' => 'required|string|max:255',
             // optional
+            'password' => 'nullable|string|max:255',
+            'tags' => 'nullable|array',
             'alias' => 'nullable|string|max:255',
             'port' => 'nullable|integer',
             'key' => 'nullable|string|max:255',

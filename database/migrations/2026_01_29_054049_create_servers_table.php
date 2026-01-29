@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name', 255);
+            $table->json('tags')->nullable();
             $table->string('alias', 255);
             $table->string('ip');
             $table->string('port')->nullable()->default(80);

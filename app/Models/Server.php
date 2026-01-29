@@ -12,6 +12,7 @@ class Server extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'tags',
         'alias',
         'ip',
         'port',
@@ -20,5 +21,9 @@ class Server extends Model
         'key',
         'status',
         'type',
+    ];
+
+    protected $casts = [
+        'tags' => 'array',
     ];
 }
