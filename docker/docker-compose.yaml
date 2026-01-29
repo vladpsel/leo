@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  leo_bd:
+    image: postgres:16
+    container_name: db_leo
+    restart: always
+    ports:
+      - "5437:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: leo
+    volumes:
+      - ./postgresdb:/var/lib/postgresql/data
+
+  leo_pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_leo
+    restart: always
+    ports:
+      - "5058:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+
+  leo_php:
+    build:
+      context: ./php
+    container_name: php_leo
+    ports:
+      - "9000:9000"
+      - "5173:5173"
+    volumes:
+      - ../.:/var/www/leo
+      - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
+    depends_on:
+      - leo_bd
+
+
+  leo_nginx:
+    image: nginx:stable-alpine
+    container_name: nginx_leo
+    ports:
+      - '8090:80'
+    volumes:
+      - ../.:/var/www/leo
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - leo_php
+      - leo_bd
