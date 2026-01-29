@@ -25,7 +25,7 @@ RUN apt-get update && \
 # Установка Node.js
 WORKDIR /var/www/leo
 
-RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs
 
 # Установка Composer
