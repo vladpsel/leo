@@ -1,7 +1,7 @@
 @import 'tailwindcss';
+@import "tw-animate-css";
 
 @plugin 'tailwindcss-animate';
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -142,4 +142,9 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+.header {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
 }

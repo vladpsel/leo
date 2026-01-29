@@ -9,4 +9,5 @@ Route::get('logout', [\App\Http\Controllers\SecurityController::class, 'logout']
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [PageController::class, 'dashboard'])->name('dashboard');
+    Route::get('servers', [PageController::class, 'servers'])->name('servers');
 });

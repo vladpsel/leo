@@ -22,4 +22,9 @@ class PageController extends Controller
     {
         return Inertia::render('Dashboard', ['name' => 'John']);
     }
+
+    public function servers(): Response
+    {
+        return Inertia::render('Dashboard', []);
+    }
 }
