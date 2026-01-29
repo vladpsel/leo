@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
     plugins: [
@@ -18,6 +19,14 @@ export default defineConfig({
                 },
             },
         }),
+        viteStaticCopy({
+            targets: [
+                {
+                    src: 'resources/images/[^.]*', // что копируем
+                    dest: 'images'                // куда (внутри public/build)
+                }
+            ]
+        })
     ],
     server: {
         host: true,

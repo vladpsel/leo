@@ -16,16 +16,18 @@
     <div class="w-1/3">
         <form action="#">
             @csrf
-            <h2 class="text-xl text-center mb-2">{{ config('app.name', 'Laravel') }}</h2>
+            <div class="icon w-[50px] mb-4">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="">
+            </div>
             <fieldset class="mb-2">
                 <p class="font-bold text-sm mb-1">Login</p>
                 <div>
-                    <input type="text" class="w-full border-2 border-gray-400 rounded-md border-gray-300 p-2" placeholder="Email">
+                    <input type="text" class="w-full border-2 border-gray-400 rounded-md p-2" placeholder="Email">
                 </div>
             </fieldset>
             <fieldset class="mb-2">
                 <p class="font-bold text-sm mb-1">Password</p>
-                <input type="password" class="w-full border-2 border-gray-400 rounded-md border-gray-300 p-2" placeholder="Email">
+                <input type="password" class="w-full border-2 border-gray-400 rounded-md p-2" placeholder="Email">
             </fieldset>
             <fieldset>
                 <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-md p-2 cursor-pointer">Login</button>
