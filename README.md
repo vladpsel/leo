@@ -1,5 +1,5 @@
 # Leo
-Laravel-based SPA for servers ochestration.
+Laravel-based SPA for servers orchestration.
 
 ## Stack
 - Laravel 12
@@ -9,6 +9,7 @@ Laravel-based SPA for servers ochestration.
 - Laravel Sanctum
 - Docker
 - Blade Components
+- Ziggy (for frontend routing)
 
 ### notice
 run throught
