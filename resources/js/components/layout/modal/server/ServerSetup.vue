@@ -1,5 +1,5 @@
 <template>
-    <Dialog>
+    <Dialog v-model:visible="open">
         <form @submit.prevent>
             <DialogTrigger as-child>
                 <Button variant="primary" type="button">Add Server</Button>
@@ -25,21 +25,21 @@
                     <Label class="mb-2">Tags (optional) - <span class="text-xs">(Domain/Tag/ etc.)</span></Label>
                     <TagsInput v-model="server.tags" class="w-full">
                         <TagsInputItem v-for="item in server.tags" :key="item" :value="item">
-                            <TagsInputItemText />
-                            <TagsInputItemDelete />
+                            <TagsInputItemText/>
+                            <TagsInputItemDelete/>
                         </TagsInputItem>
 
-                        <TagsInputInput placeholder="Fruits..." />
+                        <TagsInputInput placeholder="Fruits..."/>
                     </TagsInput>
                 </div>
                 <div class="w-full flex gap-4 items-center">
                     <div class="flex-1/2">
                         <Label class="mb-2">Username</Label>
-                        <Input id="username" v-model="server.username" required/>
+                        <Input id="username" v-model="server.username" required autocomplete="off" />
                     </div>
                     <div class="flex-1/2">
                         <Label class="mb-2">Password</Label>
-                        <Input id="password" v-model="server.password" type="password"/>
+                        <Input id="password" v-model="server.password" type="password" autocomplete="off" />
                     </div>
                 </div>
                 <div class="w-full mb-2">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="w-full mb-2">
                     <Label class="mb-2">Key (optional)</Label>
-                    <Textarea id="port" v-model="server.key"/>
+                    <Textarea id="key" v-model="server.key"/>
                 </div>
                 <DialogFooter>
                     <DialogClose as-child>
@@ -75,11 +75,22 @@ import {
 import {Button} from "@/components/ui/button/index.js";
 import {toast} from "vue-sonner";
 import {Input} from "@/components/ui/input/index.js";
-import {TagsInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputInput} from "@/components/ui/tags-input/index.js";
+import {
+    TagsInput,
+    TagsInputItem,
+    TagsInputItemDelete,
+    TagsInputItemText,
+    TagsInputInput
+} from "@/components/ui/tags-input/index.js";
 import {Label} from "reka-ui";
 import {Textarea} from "@/components/ui/textarea/index.js";
 
+// props and emits
+
 // values
+const status = ref('new');
+const open = ref(false);
+
 const server = ref({
     name: '',
     ip: '',
@@ -95,23 +106,35 @@ const reset = () => {
         ip: '',
         password: '',
         username: '',
-        alias: '',
         port: '',
+        key: '',
     };
 }
 const add = async () => {
     try {
         let url = '/api/v1/server';
-        const {data} = await axios.post(url, server.value).catch((e) => {
-            toast.error(e.message);
-        });
 
-        console.log(data)
-        // reset();
+        let { data } = await axios.post(url, server.value);
+
+        open.value = false;
+        toast.success(data.message || 'Server added successfully');
+        reset();
     } catch (error) {
-        console.error(error)
+        if (error.response?.status === 422) {
+            const errors = error.response.data.errors;
+
+            Object.values(errors).forEach((fieldErrors) => {
+                fieldErrors.forEach((msg) => toast.error(msg));
+            });
+        } else {
+            toast.error(
+                error.response?.data?.message || 'Something went wrong'
+            );
+        }
     }
+
 }
+
 // calls
 
 </script>

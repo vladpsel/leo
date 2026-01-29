@@ -13,10 +13,3 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('servers', [PageController::class, 'servers'])->name('servers');
 });
-
-Route::get('/debug-auth', function () {
-    return [
-        'user' => auth()->user(),
-        'session' => session()->all(),
-    ];
-});

@@ -9,6 +9,10 @@ use App\Http\Requests\Server\ServerApiRequest;
 
 class ServerApiController extends Controller
 {
+    public function index()
+    {
+        return response()->json([]);
+    }
     public function store(ServerApiRequest $request)
     {
         $data = $request->validated();

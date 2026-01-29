@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('name', 255);
             $table->json('tags')->nullable();
             $table->string('alias', 255);
-            $table->string('ip');
+            $table->string('ip', 255);
             $table->string('port')->nullable()->default(80);
-            $table->string('username');
+            $table->string('username', 255);
             $table->string('password');
-            $table->string('key')->nullable();
+            $table->text('key')->nullable();
             $table->string('status');
             $table->string('type')->nullable();
             $table->softDeletes();
