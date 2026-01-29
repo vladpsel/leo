@@ -11,6 +11,8 @@ Laravel-based SPA for servers orchestration.
 - Blade Components
 - Ziggy (for frontend routing)
 - Schad Vue
+- Laravel Sanctum
+- Axios
 
 ## Installation
 - pull repo
