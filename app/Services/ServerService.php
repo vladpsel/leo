@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Enums\Server\ServerStatus;
 use App\Models\Server;
 use Illuminate\Support\Facades\Auth;
+use phpseclib3\Net\SSH2;
 
 class ServerService
 {
@@ -31,5 +32,21 @@ class ServerService
         return $server;
 
 
+    }
+
+    public function operation(Server $server, string $operation)
+    {
+        match ($operation) {
+            'ping' => $res = $this->pingOperation($server),
+        };
+
+        return $res ?? null;
+    }
+
+    private function pingOperation($server)
+    {
+        $ssh = new SSH2($server->ip);
+        $ssh->login($server->username, $server->pswd);
+        return nl2br(e($ssh->exec('ls -la /')));
     }
 }

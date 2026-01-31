@@ -9,6 +9,7 @@ use App\Http\Requests\Server\ServerApiRequest;
 use App\Models\Server;
 use App\Services\ServerService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ServerApiController extends Controller
 {
@@ -27,7 +28,7 @@ class ServerApiController extends Controller
             'list' => $servers
         ]);
     }
-    public function store(ServerApiRequest $request)
+    public function store(ServerApiRequest $request): JsonResponse
     {
         $data = $request->validated();
         $result = $this->serverService->create($data);
@@ -35,6 +36,15 @@ class ServerApiController extends Controller
         return response()->json([
             'message' => 'Server created successfully',
             'data' => $result,
+        ]);
+    }
+    public function operation(Server $server, Request $request)//: JsonResponse
+    {
+        $result = $this->serverService->operation($server, $request->get('operation'));
+
+        return response()->json([
+            'message' => 'Server operation successful',
+            'data' => $result ?? ''
         ]);
     }
 }

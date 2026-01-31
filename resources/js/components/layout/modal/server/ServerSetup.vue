@@ -2,7 +2,7 @@
     <Dialog v-model:open="open">
         <form @submit.prevent>
             <DialogTrigger as-child>
-                <Button variant="primary" type="button">Add Server</Button>
+                <Button variant="secondary" type="button">Add Server</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

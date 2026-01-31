@@ -9,6 +9,8 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::prefix('server')->group(function () {
         Route::get('/', [ServerApiController::class, 'index']);
         Route::post('/', [ServerApiController::class, 'store']);
+
+        Route::post('/{server}/operation', [ServerApiController::class, 'operation'])->name('server.operation');
     });
 
 });

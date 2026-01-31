@@ -13,6 +13,7 @@ Laravel-based SPA for servers orchestration.
 - Schad Vue
 - Laravel Sanctum
 - Axios
+- Laravel Queue
 
 ## Installation
 - pull repo
