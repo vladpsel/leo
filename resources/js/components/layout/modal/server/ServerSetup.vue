@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model:visible="open">
+    <Dialog v-model:open="open">
         <form @submit.prevent>
             <DialogTrigger as-child>
                 <Button variant="primary" type="button">Add Server</Button>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="flex-1/2">
                         <Label class="mb-2">Password</Label>
-                        <Input id="password" v-model="server.password" type="password" autocomplete="off" />
+                        <Input id="password" v-model="server.pswd" type="password" autocomplete="off" />
                     </div>
                 </div>
                 <div class="w-full mb-2">
@@ -49,6 +49,10 @@
                 <div class="w-full mb-2">
                     <Label class="mb-2">Key (optional)</Label>
                     <Textarea id="key" v-model="server.key"/>
+                </div>
+                <div class="w-full mb-2">
+                    <Label class="mb-2">Path (optional)</Label>
+                    <Input id="key" v-model="server.directory"/>
                 </div>
                 <DialogFooter>
                     <DialogClose as-child>
@@ -66,11 +70,13 @@ import {ref} from 'vue';
 import axios from 'axios'
 import {
     Dialog,
+    DialogTitle,
     DialogContent,
     DialogDescription,
     DialogFooter,
     DialogHeader,
-    DialogTrigger
+    DialogTrigger,
+    DialogClose
 } from "@/components/ui/dialog/index.js";
 import {Button} from "@/components/ui/button/index.js";
 import {toast} from "vue-sonner";
@@ -86,7 +92,7 @@ import {Label} from "reka-ui";
 import {Textarea} from "@/components/ui/textarea/index.js";
 
 // props and emits
-
+const emit = defineEmits(['server-added']);
 // values
 const status = ref('new');
 const open = ref(false);
@@ -94,8 +100,8 @@ const open = ref(false);
 const server = ref({
     name: '',
     ip: '',
-    password: '',
-    username: '',
+    pswd: '',
+    username: 'root',
     alias: '',
     port: '',
 })
@@ -104,8 +110,8 @@ const reset = () => {
     server.value = {
         name: '',
         ip: '',
-        password: '',
-        username: '',
+        pswd: '',
+        username: 'root',
         port: '',
         key: '',
     };
@@ -118,6 +124,7 @@ const add = async () => {
 
         open.value = false;
         toast.success(data.message || 'Server added successfully');
+        emit('server-added', server.value);
         reset();
     } catch (error) {
         if (error.response?.status === 422) {

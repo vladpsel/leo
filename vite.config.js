@@ -34,17 +34,31 @@ export default defineConfig({
             ]
         })
     ],
+    // server: {
+    //     host: true,
+    //     port: 5173,
+    //     strictPort: true,
+    //     hmr: {
+    //         host: '127.0.0.1',
+    //         port: 5173,
+    //     },
+    //     watch: {
+    //         ignored: ['**/storage/framework/views/**'],
+    //     },
+    // },
     server: {
-        host: true,
+        host: '0.0.0.0',
         port: 5173,
         strictPort: true,
-        hmr: false,
-        // hmr: {
-        //     host: '127.0.0.1',
-        //     port: 5173,
-        // },
+
+        hmr: {
+            host: 'localhost', // важно
+            port: 5173,
+        },
+
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            usePolling: true,   // КЛЮЧЕВО
+            interval: 100,
         },
     },
 });

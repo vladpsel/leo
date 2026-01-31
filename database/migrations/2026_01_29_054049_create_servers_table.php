@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('ip', 255);
             $table->string('port')->nullable()->default(80);
             $table->string('username', 255);
-            $table->string('password');
+            $table->string('pswd')->nullable()->default('');
             $table->text('key')->nullable();
             $table->string('status');
             $table->string('type')->nullable();
+            $table->string('directory')->nullable()->default('/var/www');
             $table->softDeletes();
             $table->timestamps();
         });

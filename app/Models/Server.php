@@ -17,10 +17,11 @@ class Server extends Model
         'ip',
         'port',
         'username',
-        'password',
+        'pswd',
         'key',
         'status',
         'type',
+        'directory',
     ];
 
     protected $casts = [

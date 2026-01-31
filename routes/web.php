@@ -12,4 +12,7 @@ Route::get('logout', [\App\Http\Controllers\SecurityController::class, 'logout']
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('servers', [PageController::class, 'servers'])->name('servers');
+    Route::get('servers/{alias}', [PageController::class, 'server'])
+        ->where('alias', '[a-zA-Z0-9-_]+')
+        ->name('server');
 });

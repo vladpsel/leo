@@ -26,6 +26,7 @@ class ServerService
         $server->user_id = $this->user->id;
         $server->alias = uniqid();
         $server->status = ServerStatus::STATUS_NEW->value;
+        $server->directory = $data['directory'] ?? '/var/www/';
         $server->save();
         return $server;
 

@@ -6,8 +6,16 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from 'ziggy-js';
 import Root from "./Root.vue";
 
+const pages = import.meta.glob('./Pages/**/*.vue')
+
 createInertiaApp({
-    resolve: name => import(`./Pages/${name}.vue`),
+    resolve: name => {
+        const page = pages[`./Pages/${name}.vue`]
+        if (!page) {
+            throw new Error(`Страница не найдена: ${name}`)
+        }
+        return page()
+    },
     setup({el, App, props, plugin}) {
         const app = createApp(Root, {App, props})
         app.use(plugin)

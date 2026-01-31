@@ -26,13 +26,14 @@ class ServerApiRequest extends FormRequest
             'ip' => 'required|ip',
             'username' => 'required|string|max:255',
             // optional
-            'password' => 'nullable|string|max:255',
+            'pswd' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'alias' => 'nullable|string|max:255',
             'port' => 'nullable|integer',
             'key' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
             'type' => 'nullable|string|max:255',
+            'directory' => 'nullable|string|max:255',
         ];
     }
 }
